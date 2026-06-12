@@ -108,15 +108,42 @@
 
 ## 🎮 Demo
 
-**Live Demo**: [https://phishguard.ai](https://phishguard.ai)
+**Local Development**:
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:5000`
 
 **Demo Credentials**:
 - User: `user@example.com` / `password`
 - Admin: `admin@phishguard.ai` / `admin123`
 
+### Quick Start
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+python app.py
+```
+
+In a second terminal:
+
+```bash
+npm install
+npm run dev
+```
+
 ---
 
 ## 📦 Installation
+
+### Verified Setup
+
+The project currently verifies cleanly with:
+- `pytest -q` → 22 tests passed
+- `npm run build` → production frontend build succeeds
+
+### Prerequisites
 
 ### Prerequisites
 - Python 3.11 or higher
@@ -595,5 +622,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ by the PhishGuard AI Team
 
 **Protecting the internet, one URL at a time.** 🛡️
-#   P h i s h G u a r d - A I  
- 
+
