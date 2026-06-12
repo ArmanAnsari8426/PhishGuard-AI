@@ -1,0 +1,5 @@
+Contact: mailto:security@phishguard.ai
+Contact: https://phishguard.ai/security
+Expires: 2025-12-31T23:59:59z
+Preferred-Languages: en
+Canonical: https://phishguard.ai/.well-known/security.txt

@@ -1,0 +1,22 @@
+{
+  "name": "PhishGuard AI - Phishing Detection",
+  "short_name": "PhishGuard",
+  "description": "AI-Powered Phishing Detection Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#00d4ff",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["security", "productivity", "utilities"]
+}

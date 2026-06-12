@@ -1,0 +1,48 @@
+# PhishGuard AI - Docker Compose Configuration
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-change-this-in-production}
+      - DATABASE_URL=postgresql://phishguard:phishguard@db:5432/phishguard
+      - VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY}
+      - GOOGLE_SAFE_BROWSING_API_KEY=${GOOGLE_SAFE_BROWSING_API_KEY}
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - phishguard-network
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=phishguard
+      - POSTGRES_USER=phishguard
+      - POSTGRES_PASSWORD=phishguard
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - phishguard-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - phishguard-network
+
+volumes:
+  postgres_data:
+
+networks:
+  phishguard-network:
+    driver: bridge

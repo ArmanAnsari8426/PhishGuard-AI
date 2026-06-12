@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishGuard AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 360px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a1a2e 100%);
+      color: #e2e8f0;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    
+    .status-card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(30, 58, 95, 0.5);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .risk-gauge {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    
+    .risk-score {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .risk-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: #00ff88;
+    }
+    
+    .risk-label {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(0, 255, 136, 0.1);
+      color: #00ff88;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+    
+    .url-display {
+      background: rgba(6, 9, 18, 0.8);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: #94a3b8;
+      word-break: break-all;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .scan-button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    
+    .scan-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+    }
+    
+    .scan-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .feature {
+      background: rgba(17, 24, 39, 0.5);
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 11px;
+    }
+    
+    .feature-label {
+      color: #94a3b8;
+      margin-bottom: 2px;
+    }
+    
+    .feature-value {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+    
+    .login-prompt {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+    
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(30, 58, 95, 0.3);
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🛡️</div>
+    <div>
+      <div class="title">PhishGuard AI</div>
+      <div class="subtitle">Real-time phishing protection</div>
+    </div>
+  </div>
+  
+  <div id="content">
+    <!-- Content will be dynamically inserted here -->
+  </div>
+  
+  <div class="footer">
+    Powered by PhishGuard AI v1.0.0
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
