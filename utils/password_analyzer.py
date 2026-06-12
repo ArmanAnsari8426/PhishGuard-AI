@@ -234,13 +234,18 @@ class PasswordAnalyzer:
             'no_spaces': 3,
             'min_entropy': 5
         }
-        
+
         total = 0
         for check, value in checks.items():
             if value.get('passed'):
                 total += weights.get(check, 0)
-        
-        return min(100, total)
+
+        if not checks.get('no_common', {}).get('passed'):
+            total -= 20
+        if not checks.get('no_dictionary', {}).get('passed'):
+            total -= 12
+
+        return max(0, min(100, total))
     
     def _get_strength(self, score):
         """Get strength level from score"""
