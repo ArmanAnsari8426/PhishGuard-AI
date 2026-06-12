@@ -88,14 +88,16 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Deploy to Render
+      if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
       env:
         RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
       run: |
-        if [ -z "$RENDER_DEPLOY_HOOK" ]; then
-          echo "Error: RENDER_DEPLOY_HOOK secret is not set"
-          exit 1
-        fi
+        echo "Deploying to Render..."
         curl -X POST "$RENDER_DEPLOY_HOOK"
-    
+
+    - name: Skip deployment if secret is missing
+      if: ${{ secrets.RENDER_DEPLOY_HOOK == '' }}
+      run: echo "Skipping Render deployment because RENDER_DEPLOY_HOOK is not configured."
+
     - name: Notify deployment
-      run: echo "Deployment successful!"
+      run: echo "Deployment step completed."
