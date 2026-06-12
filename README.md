@@ -112,9 +112,11 @@
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:5000`
 
-**Demo Credentials**:
-- User: `user@example.com` / `password`
-- Admin: `admin@phishguard.ai` / `admin123`
+**Super Admin Access (documentation only)**:
+- Email: `admin@phishguard.ai`
+- Password: `admin123`
+
+> Use these credentials only for the super-admin account in the demo environment. Regular users should register their own account from the login page.
 
 ### Quick Start
 
