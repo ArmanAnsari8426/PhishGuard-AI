@@ -11,6 +11,24 @@ export interface User {
 const STORAGE_KEY = 'phishguard_auth';
 const USERS_KEY = 'phishguard_users';
 
+const DEFAULT_SUPER_ADMIN = {
+  id: 'super-admin',
+  name: 'Super Admin',
+  email: 'adminadmine@8426gmail.com',
+  password: 'Arman@8426',
+  role: 'admin' as const,
+  createdAt: '2026-06-12T00:00:00.000Z',
+  scanCount: 0,
+};
+
+export function ensureDefaultSuperAdmin() {
+  const users = getUsers();
+  if (!users.some(user => user.email === DEFAULT_SUPER_ADMIN.email)) {
+    users.push(DEFAULT_SUPER_ADMIN);
+    saveUsers(users);
+  }
+}
+
 export function getUsers(): Array<User & { password: string }> {
   const data = localStorage.getItem(USERS_KEY);
   return data ? JSON.parse(data) : [];
@@ -40,6 +58,7 @@ export function registerUser(name: string, email: string, password: string): Use
 }
 
 export function loginUser(email: string, password: string): User | null {
+  ensureDefaultSuperAdmin();
   const users = getUsers();
   const user = users.find(u => u.email === email && u.password === password);
   if (user) {

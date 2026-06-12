@@ -113,8 +113,8 @@
 - Backend: `http://localhost:5000`
 
 **Super Admin Access (documentation only)**:
-- Email: `admin@phishguard.ai`
-- Password: `admin123`
+- Email: `adminadmine@8426gmail.com`
+- Password: `Arman@8426`
 
 > Use these credentials only for the super-admin account in the demo environment. Regular users should register their own account from the login page.
 

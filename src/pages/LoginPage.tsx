@@ -150,13 +150,9 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-6 pt-6 border-t border-cyber-border/30">
-          <p className={`text-xs text-center mb-3 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-            Demo credentials
+          <p className={`text-xs text-center ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+            Use your registered email and password to sign in.
           </p>
-          <div className={`text-xs text-center font-mono p-2 rounded-lg ${isDark ? 'bg-cyber-darker' : 'bg-slate-50'}`}>
-            <div className={isDark ? 'text-slate-400' : 'text-slate-500'}>user@example.com / password</div>
-            <div className={isDark ? 'text-slate-400' : 'text-slate-500'}>admin@phishguard.ai / admin123</div>
-          </div>
         </div>
       </motion.div>
     </div>
