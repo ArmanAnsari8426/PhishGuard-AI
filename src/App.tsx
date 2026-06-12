@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -47,6 +48,7 @@ export default function App() {
     <ThemeProvider>
       <BrowserRouter>
         <AppLayout>
+          <Analytics />
           <Routes>
             {/* Public Pages */}
             <Route path="/" element={<LandingPage />} />
